@@ -2,8 +2,15 @@ package org.brohede.marcus.listviewapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +25,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        List<String> listdata = new ArrayList<String>(Arrays.asList(mountainNames));
         // The onCreate method is run when the app is created.
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),R.layout.list_item_textview,R.id.my_item_textview,listdata);
+
+        ListView myListView = (ListView)findViewById(R.id.my_ListView);
+        myListView.setAdapter(adapter);
+
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"Alps, ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Alps",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Alaska",Toast.LENGTH_SHORT).show();
+            }
+        });
         // Before you can implement this you need to create the layout xml files that
         // will hold/show your data created here. You need three create things:
         // * my_listview - the ID to the actual layout element that is our ListView.
